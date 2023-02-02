@@ -47,12 +47,31 @@ public class CheckScooterOrderingTests {
         driver = new ChromeDriver();
     }
     @Test
-    public void CheckScooterOrderingTest() {
+    public void checkScooterOrderingTestButtonUp() {
         MainPage mainPage = new MainPage(driver);
         OrderPageCustomer orderPageCustomer = new OrderPageCustomer(driver);
         OrderRentPage orderRentPage = new OrderRentPage(driver);
         mainPage.openMainPage();
-        mainPage.openOrderPageCustomer();
+        mainPage.openOrderPageCustomerUp();
+        orderPageCustomer.inputFirstName(firstName).inputLastName(lastName).inputAddress(address);
+        orderPageCustomer.chooseSubwayStation(subwayStation);
+        orderPageCustomer.inputPhoneNumber(phoneNumber);
+        orderPageCustomer.clickNext();
+        orderRentPage.inputOrderRentDate(rentDate);
+        orderRentPage.checkScooterColor();
+        orderRentPage.clickRentTimeForm();
+        orderRentPage.inputCommentForCourier(commentText);
+        orderRentPage.checkOrderVerification();
+        isOrderFinal = orderRentPage.isOrderFinal();
+        assertTrue("Произошла ошибка при оформлении заказа", isOrderFinal);
+    }
+    @Test
+    public void checkScooterOrderingTestWithButtonDown() {
+        MainPage mainPage = new MainPage(driver);
+        OrderPageCustomer orderPageCustomer = new OrderPageCustomer(driver);
+        OrderRentPage orderRentPage = new OrderRentPage(driver);
+        mainPage.openMainPage();
+        mainPage.openOrderPageCustomerDown();
         orderPageCustomer.inputFirstName(firstName).inputLastName(lastName).inputAddress(address);
         orderPageCustomer.chooseSubwayStation(subwayStation);
         orderPageCustomer.inputPhoneNumber(phoneNumber);
